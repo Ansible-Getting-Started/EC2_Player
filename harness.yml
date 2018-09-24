@@ -1,0 +1,66 @@
+---
+- name: Create Video Player Page
+  hosts: tag_Name_Woola
+  remote_user: centos
+  become: true
+
+  tasks:
+  - name: Enable Epel
+    yum:
+      name: epel-release
+    state: present
+
+  - name: Fetch Dependencies
+    yum:
+      name: '{{ item }}'
+      state: latest
+    with_items:
+      - unzip
+      - wget
+      - bzip2
+      - httpd
+
+  - name: Finished Dependencies
+    file:
+      path: /var/www/html/inc/vid/
+      state: directory
+      mode: 0755
+
+  - name: Setting Dirs
+    file:
+      path: /var/www/html/video/
+      state: directory
+      mode: 0755
+
+  - name: Installing Player
+    unarchive:
+      src: "{{ player_files }}"
+      dest: /var/www/html/inc/vid/
+      remote_src: True
+      owner: apache
+      group: apache
+
+  - name: Grabing the Video
+    get_url:
+      url: "{{ video_source }}"
+      dest: /var/www/html/video/
+      owner: apache
+      group: apache
+
+  - name: Video and Cover Downloaded
+    get_url:
+      url: "{{ video_cover }}"
+      dest: /var/www/html/video/
+      owner: apache
+      group: apache
+
+  - name: Setting Up Player
+    template:
+      src: index.html
+      dest: /var/www/html/index.html
+
+  - name: Starting the Player
+    service:
+      name: httpd
+      state: restarted
+      enabled: yes

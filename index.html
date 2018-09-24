@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>My Little Video Player</title>
+<link href="inc/vid/video-js.min.css" rel="stylesheet">
+<script src="inc/vid/video.min.js"></script>
+<style>
+.content {
+    max-width: 960px;
+    margin: auto;
+}
+</style>
+</head>
+<body bgcolor="52AAAC">
+<div class="content">
+<video
+    id="my-player"
+    class="video-js"
+    controls
+    preload="auto"
+    poster="video/why_ansible.jpg"
+    data-setup='{}'>
+  <source src="video/RedHatInspiration.mp4" type="video/mp4"></source>
+  <p class="vjs-no-js">
+    To view this video please enable JavaScript, and consider upgrading to a
+    web browser that
+    <a href="http://videojs.com/html5-video-support/" target="_blank">
+      supports HTML5 video
+    </a>
+  </p>
+</video>
+</div>
+</body>
+</html>

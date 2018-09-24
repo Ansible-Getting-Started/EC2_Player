@@ -1,0 +1,28 @@
+---
+- name: Spin up Cent instance
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+  - name: Create instance
+    ec2:
+      key_name: mydemo
+      group: "{{ mysecuritygroup }}"
+      volumes:
+      - device_name: /dev/sda1
+        volume_type: gp2
+        volume_size: 28
+        delete_on_termination: true
+      vpc_subnet_id: "{{ which_subnet }}"
+      instance_type: t2.micro
+      image: "{{ base_image }}"
+      wait: true
+      region: "{{ region }}"
+      exact_count: 1
+      count_tag:
+        Count: "{{ project_name }}"
+      instance_tags:
+        Name: "{{ project_name }}"
+        Count: "{{ project_name }}"
+      assign_public_ip: true
+    register: ec2
