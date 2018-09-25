@@ -6,7 +6,7 @@
   tasks:
   - name: Create instance
     ec2:
-      key_name: mydemo
+      key_name: "{{ keymaster }}"
       group: "{{ mysecuritygroup }}"
       volumes:
       - device_name: /dev/sda1
