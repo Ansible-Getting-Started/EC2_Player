@@ -3,6 +3,8 @@
   hosts: localhost
   gather_facts: false
   vars:
+    - keymaster: tower_rsa
+    - mysecuritygroup: servers
     - region: us-east-2
     - project_name: Woola
     - which_subnet: subnet-f6b1c99f
