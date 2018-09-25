@@ -2,6 +2,11 @@
 - name: Spin up Cent instance
   hosts: localhost
   gather_facts: false
+  vars:
+    - region: us-east-2
+    - project_name: Woola
+    - which_subnet: subnet-f6b1c99f
+    - base_image: ami-0f956c78823496a29
 
   tasks:
   - name: Create instance

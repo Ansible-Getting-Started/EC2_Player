@@ -3,6 +3,10 @@
   hosts: tag_Name_Woola
   remote_user: centos
   become: true
+  vars:
+    - player_files: https://github.com/videojs/video.js/releases/download/v7.2.3/video-js-7.2.3.zip
+    - video_source: https://s3.us-east-2.amazonaws.com/ansible-getting-started/RedHatInspiration.mp4
+    - video_cover: https://s3.us-east-2.amazonaws.com/ansible-getting-started/why_ansible.jpg
 
   tasks:
   - name: Enable Epel
